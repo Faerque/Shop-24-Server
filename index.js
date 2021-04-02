@@ -5,12 +5,19 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const admin = require("firebase-admin");
 
+app.use(cors());
+app.use(express.json());
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 const port = process.env.PORT || 5055;
 const MongoClient = require("mongodb").MongoClient;
 const ObjectID = require("mongodb").ObjectID;
 
-app.use(cors());
-app.use(express.json());
 
 const serviceAccount = require('./shop-24-7-firebase-adminsdk-2tgiw-58e18b2645.json');
 
