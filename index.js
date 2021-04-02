@@ -14,7 +14,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-const port = process.env.PORT || 5055;
+const port = 5055;
+  
 const MongoClient = require("mongodb").MongoClient;
 const ObjectID = require("mongodb").ObjectID;
 
@@ -150,6 +151,4 @@ client.connect((err) => {
    console.log("Orders Database Connected Successfully");
 });
 
-app.listen(port, () => {
-  console.log(`Port at http://localhost:${port}`);
-});
+app.listen(process.env.PORT || port);
