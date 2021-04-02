@@ -1,3 +1,3 @@
 # full-stack-server-Faerque
 
-Its a Server Site 
+Its a Server Side
