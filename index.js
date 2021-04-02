@@ -99,8 +99,8 @@ client.connect((err) => {
 
 
   app.get('/orders', (req, res) =>{
-    console.log(req.headers.authorization);
-    ordersCollection.find({'email': req.query.email})
+    // console.log(req.headers.authorization);
+    ordersCollection.find({email: req.query.email})
     .toArray( (err, documents) =>{
       res.send(documents);
     })
