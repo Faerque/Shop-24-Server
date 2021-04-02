@@ -88,62 +88,62 @@ client.connect((err) => {
 
   const ordersCollection = client.db("Shop24").collection("orders");
 
-  // app.get("/orders", (req, res) => {
-  //   const bearer = req.headers.authorization;
-  //   if (bearer && bearer.startsWith("Bearer ")) {
-  //     const idToken = bearer.split(' ')[1];
+  app.get("/orders", (req, res) => {
+    const bearer = req.headers.authorization;
+    if (bearer && bearer.startsWith("Bearer ")) {
+      const idToken = bearer.split(' ')[1];
   
-  //     admin
-  //       .auth()
-  //       .verifyIdToken(idToken)
-  //       .then((decodedToken) => {
+      admin
+        .auth()
+        .verifyIdToken(idToken)
+        .then((decodedToken) => {
           
-  //         const tokenEmail = decodedToken.email;
-  //         const queryEmail = req.query.email;
+          const tokenEmail = decodedToken.email;
+          const queryEmail = req.query.email;
           
-  //         if (tokenEmail == queryEmail) {
-  //             ordersCollection.find({email: queryEmail})
-  //           .toArray((err, documents)=>{
-  //             res.status(200).send(documents);
-  //           })
-  //           // .catch((error) => {
-  //           //   res.status(401).send('un-authorized access!!')  
-  //           // })
-  //         }
-  //         else{
-  //           res.status(401).send('un-authorized access!!')  
-  //         }
+          if (tokenEmail == queryEmail) {
+              ordersCollection.find({email: queryEmail})
+            .toArray((err, documents)=>{
+              res.status(200).send(documents);
+            })
+            // .catch((error) => {
+            //   res.status(401).send('un-authorized access!!')  
+            // })
+          }
+          else{
+            res.status(401).send('un-authorized access!!')  
+          }
           
-  //       })
-  //   }
+        })
+    }
 
-  // });
-  // app.post("/addOrder", (req, res) => {
-  //   const newChecking = req.body;
-  //   console.log(newChecking)
-  //   ordersCollection.insertOne(newChecking).then((result) => {
-  //     res.send(result.insertedCount > 0);
-  //     console.log("inserted Count", result.insertedCount);
-  //   });
-  // });
-
-  app.post('/addOrder', (req, res) => {
-    const newOrder = req.body;
-    ordersCollection.insertOne(newOrder)
-    .then(result => {
+  });
+  app.post("/addOrder", (req, res) => {
+    const newChecking = req.body;
+    console.log(newChecking)
+    ordersCollection.insertOne(newChecking).then((result) => {
       res.send(result.insertedCount > 0);
-    })
-    console.log(newOrder);
-  })
+      console.log("inserted Count", result.insertedCount);
+    });
+  });
+
+  // app.post('/addOrder', (req, res) => {
+  //   const newOrder = req.body;
+  //   ordersCollection.insertOne(newOrder)
+  //   .then(result => {
+  //     res.send(result.insertedCount > 0);
+  //   })
+  //   console.log(newOrder);
+  // })
 
 
-  app.get('/orders', (req, res) =>{
-    console.log(req.headers.authorization);
-    ordersCollection.find({'email': req.query.email})
-    .toArray( (err, documents) =>{
-      res.send(documents);
-    })
-  })
+  // app.get('/orders', (req, res) =>{
+  //   console.log(req.headers.authorization);
+  //   ordersCollection.find({'email': req.query.email})
+  //   .toArray( (err, documents) =>{
+  //     res.send(documents);
+  //   })
+  // })
 
 
 
