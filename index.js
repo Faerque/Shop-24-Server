@@ -57,7 +57,7 @@ client.connect((err) => {
       res.send(result.insertedCount > 0);
     });
   });
-
+  
   app.delete("/delete/:id", (req, res) => {
     const id = ObjectID(req.params.id);
     console.log("delete this", id);
